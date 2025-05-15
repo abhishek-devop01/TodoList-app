@@ -27,7 +27,7 @@ const Read = (props) => {
     return (
         <div className="w-[40%] p-10">
             <h1 className="mb-10 text-5xl font-thin">
-                <span className="text-pink-400">Pending</span> Todos
+                <span className="text-pink-400">Pending</span> Tasks
             </h1>
             <ol>{rendertodos}</ol>
         </div>

@@ -4,7 +4,7 @@ import Read from "./components/Read";
 
 const App = () => {
     const [todos, settodos] = useState([
-        { id: 1, title: "Kamm krle bhai", isCompleted: false },
+        { id: 1, title: "", isCompleted: false },
     ]);
 
     return (
