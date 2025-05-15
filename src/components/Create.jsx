@@ -1,44 +1,52 @@
 import { nanoid } from "nanoid";
+import { useForm } from "react-hook-form";
 
 import { useState } from "react";
 
 const Create = (props) => {
     const todos = props.todos;
     const settodos = props.settodos;
+    const {register, handleSubmit,reset, formState:{errors},} = useForm()
 
-    const [title, settitle] = useState("");
+    // const [title, settitle] = useState("");
 
-    const SubmitHandler = (e) => {
-        e.preventDefault();
+    const SubmitHandler = (data) => {
+        // e.preventDefault();
+        data.isCompleted = false;
+        data.id = nanoid();
 
-        const newtodo = {
-            id: nanoid(),
-            title: title,
-            isCompleted: false,
+        const copytodos = [...todos];
+        copytodos.push(data);
+        settodos(copytodos);
+        reset();
+
         };
 
-        let copytodos = [...todos];
-        copytodos.push(newtodo);
-        settodos(copytodos);
+        
 
-        // settodos([...todos, newtodo])
-        settitle("");
-    };
+        // // settodos([...todos, newtodo])
+        // settitle("");
+    
 
     return (
+        
         <div className=" w-[60%] p-10 ">
             <h1 className="mb-10 text-5xl font-thin">
                 Set <span className="text-red-400">Reminders</span> for <br />{" "}
                 tasks
             </h1>
-            <form onSubmit={SubmitHandler}>
+            <form onSubmit={handleSubmit(SubmitHandler)}>
                 <input
+                {...register("title",{required: true})}
                     className="p-2 border-b w-full text-2xl font-thin outline-0"
-                    onChange={(e) => settitle(e.target.value)}
-                    value={title}
+                    // onChange={(e) => settitle(e.target.value)}
+                    // value={title}
                     type="text"
                     placeholder="title"
+                    
                 />
+                {errors.title && <span className="text-sm text-red-400">This field is required</span>}
+                
                 <br />
                 <br />
                 <button className="mt-5 text-xl px-10 py-2 border rounded">
