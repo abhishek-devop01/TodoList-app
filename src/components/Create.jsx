@@ -3,10 +3,13 @@ import { useForm } from "react-hook-form";
 
 import { useState } from "react";
 import { toast } from "react-toastify";
+import { todocontext } from "../Wrapper";
+import { useContext } from "react";
 
-const Create = (props) => {
-    const todos = props.todos;
-    const settodos = props.settodos;
+
+const Create = () => {
+    const [todos, settodos] = useContext(todocontext);
+    
     const {register, handleSubmit,reset, formState:{errors},} = useForm()
 
     // const [title, settitle] = useState("");
